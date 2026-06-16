@@ -39,7 +39,7 @@ jobs:
       - name: Upload Mis Finanzas installer
         uses: actions/upload-artifact@v4
         with:
-          name: mis-finanzas-windows-${{ github.run_number }}
+          name: mis-finanzas
           path: |
             release/Mis Finanzas Setup *.exe
             release/Mis Finanzas Setup *.blockmap
