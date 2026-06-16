@@ -29,6 +29,7 @@ jobs:
       - name: Build Windows installer (NSIS)
         env:
           CI: true
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
         run: npx electron-builder --win --x64
 
       - name: List generated files
