@@ -1,12 +1,8 @@
-/* ============================================
-   Electron main (CJS) + Vite integration
-   - En dev: carga la URL del servidor Vite
-   - En prod: carga dist/index.html
-   ============================================ */
-
-const { app, BrowserWindow, shell } = require('electron');
+const { app, BrowserWindow, shell, Menu } = require('electron');
 const fs = require('fs');
 const path = require('path');
+
+Menu.setApplicationMenu(null); // 👈 esto elimina la barra
 
 function createWindow() {
   const win = new BrowserWindow({
