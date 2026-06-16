@@ -1,0 +1,59 @@
+{
+  "name": "mis-finanzas",
+  "private": true,
+  "version": "1.0.5",
+  "description": "App personal de control de finanzas",
+  "author": "Piwi",
+  "main": "electron/main.cjs",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "electron:dev": "concurrently \"vite\" \"wait-on http://localhost:5173 && cross-env VITE_DEV_SERVER_URL=http://localhost:5173 electron .\"",
+    "electron:open": "cross-env VITE_DEV_SERVER_URL=http://localhost:5173 electron .",
+    "dist:win": "npm run build && electron-builder --win --x64"
+  },
+  "dependencies": {
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.5.2",
+    "concurrently": "^9.1.2",
+    "cross-env": "^7.0.3",
+    "electron": "^33.4.11",
+    "electron-builder": "^25.1.8",
+    "vite": "^6.3.5",
+    "wait-on": "^8.0.3"
+  },
+  "build": {
+    "appId": "com.piwi.misfinanzas",
+    "productName": "Mis Finanzas",
+    "executableName": "MisFinanzas",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "dist/**/*",
+      "electron/**/*",
+      "package.json"
+    ],
+    "win": {
+      "signAndEditExecutable": true,
+      "target": [
+        {
+          "target": "nsis",
+          "arch": ["x64"]
+        }
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "installerLanguages": ["es_ES", "en_US"],
+      "language": "3082",
+      "artifactName": "${productName}-Setup-${version}.${ext}"
+    }
+  }
+}

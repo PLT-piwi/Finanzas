@@ -1,0 +1,43 @@
+# Node / npm
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Vite / build outputs
+dist/
+dist-ssr/
+
+# Electron Builder outputs
+release/
+out/
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# OS / editor junk
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Windows installers
+*.msi
+*.msix
+*.appx
+*.appxbundle
+
+# Logs
+logs/
+*.log
+
+# Cache / tooling
+.cache/
+.eslintcache
+
+# Cursor / VS Code
+.vscode/
+.cursor/
+

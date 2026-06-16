@@ -1,0 +1,111 @@
+/* ============================================
+   variables.css — design tokens
+   Edita estos valores para cambiar toda la app
+   ============================================ */
+
+:root {
+  /* --- Paleta base --- */
+  --green-50:  #E1F5EE;
+  --green-200: #5DCAA5;
+  --green-400: #1D9E75;
+  --green-600: #0F6E56;
+  --green-800: #085041;
+
+  --red-50:    #FAECE7;
+  --red-200:   #F0997B;
+  --red-400:   #D85A30;
+  --red-600:   #993C1D;
+
+  --blue-50:   #E6F1FB;
+  --blue-400:  #378ADD;
+  --blue-600:  #185FA5;
+
+  --amber-50:  #FAEEDA;
+  --amber-400: #EF9F27;
+  --amber-600: #854F0B;
+
+  --purple-50: #EEEDFE;
+  --purple-400: #7F77DD;
+  --purple-600: #534AB7;
+
+  --coral-50:  #FAECE7;
+  --coral-400: #D85A30;
+
+  --gray-50:   #F8F8F7;
+  --gray-100:  #F1EFE8;
+  --gray-200:  #E4E2D9;
+  --gray-400:  #B4B2A9;
+  --gray-600:  #5F5E5A;
+  --gray-800:  #2C2C2A;
+  --gray-900:  #1A1A18;
+
+  /* --- Colores semánticos (fondo claro) --- */
+  --bg-page:      #F1EFE8;
+  --bg-card:      #FFFFFF;
+  --bg-sidebar:   #1A1A18;
+  --bg-input:     #F8F8F7;
+
+  --text-primary:   #1A1A18;
+  --text-secondary: #5F5E5A;
+  --text-muted:     #B4B2A9;
+  --text-on-dark:   #FFFFFF;
+  --text-on-green:  #E1F5EE;
+
+  --border-light: rgba(0,0,0,0.07);
+  --border-mid:   rgba(0,0,0,0.12);
+
+  /* --- Colores de acción --- */
+  --color-income:  var(--green-400);
+  --color-expense: var(--red-400);
+  --color-balance: var(--blue-400);
+  --color-accent:  var(--green-400);
+
+  /* --- Tipografía --- */
+  --font-body:  'Inter', system-ui, sans-serif;
+  --font-mono:  'JetBrains Mono', 'Courier New', monospace;
+
+  --text-xs:   11px;
+  --text-sm:   13px;
+  --text-base: 15px;
+  --text-lg:   18px;
+  --text-xl:   24px;
+  --text-2xl:  32px;
+
+  /* --- Espaciado --- */
+  --space-1:  4px;
+  --space-2:  8px;
+  --space-3:  12px;
+  --space-4:  16px;
+  --space-5:  20px;
+  --space-6:  24px;
+  --space-8:  32px;
+  --space-10: 40px;
+
+  /* --- Bordes redondeados --- */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 20px;
+
+  /* --- Sidebar --- */
+  --sidebar-width: 220px;
+
+  /* --- Sombras --- */
+  --shadow-card: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-modal: 0 20px 60px rgba(0,0,0,0.18);
+}
+
+/* Modo oscuro — descomentar para activar
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-page:      #111110;
+    --bg-card:      #1E1E1C;
+    --bg-input:     #2A2A28;
+    --text-primary:   #F1EFE8;
+    --text-secondary: #B4B2A9;
+    --text-muted:     #5F5E5A;
+    --border-light: rgba(255,255,255,0.06);
+    --border-mid:   rgba(255,255,255,0.10);
+  }
+}
+*/
