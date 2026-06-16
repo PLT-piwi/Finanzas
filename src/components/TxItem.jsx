@@ -1,7 +1,7 @@
 import { MONTHS } from '../constants';
 import { formatCLP } from '../utils';
 
-export default function TxItem({ tx, onDelete }) {
+export default function TxItem({ tx, onDelete, onEdit }) {
   return (
     <div className="tx-item">
       <div className="tx-item__info">
@@ -14,10 +14,12 @@ export default function TxItem({ tx, onDelete }) {
         {tx.type === 'income' ? '+' : '-'}
         {formatCLP(tx.amount)}
       </span>
+      <button className="tx-item__btn tx-item__btn--edit" onClick={onEdit}>
+        Editar
+      </button>
       <button className="tx-item__btn tx-item__btn--delete" onClick={onDelete}>
         Eliminar
       </button>
     </div>
   );
 }
-

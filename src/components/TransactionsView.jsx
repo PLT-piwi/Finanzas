@@ -1,7 +1,7 @@
 import { CATEGORIES } from '../constants';
 import TxItem from './TxItem';
 
-export default function TransactionsView({ txFilterType, setTxFilterType, txFilterCat, setTxFilterCat, fullFiltered, onDeleteTx }) {
+export default function TransactionsView({ txFilterType, setTxFilterType, txFilterCat, setTxFilterCat, fullFiltered, onDeleteTx, onEditTx }) {
   return (
     <section className="view active">
       <header className="view__header">
@@ -15,9 +15,7 @@ export default function TransactionsView({ txFilterType, setTxFilterType, txFilt
           <select className="select-pill" value={txFilterCat} onChange={(e) => setTxFilterCat(e.target.value)}>
             <option value="all">Todas las categorías</option>
             {[...CATEGORIES.expense, ...CATEGORIES.income].map((c) => (
-              <option key={c} value={c}>
-                {c}
-              </option>
+              <option key={c} value={c}>{c}</option>
             ))}
           </select>
         </div>
@@ -25,7 +23,7 @@ export default function TransactionsView({ txFilterType, setTxFilterType, txFilt
       <div className="card">
         <div className="tx-list">
           {fullFiltered.map((tx) => (
-            <TxItem key={tx.id} tx={tx} onDelete={() => onDeleteTx(tx.id)} />
+            <TxItem key={tx.id} tx={tx} onDelete={() => onDeleteTx(tx.id)} onEdit={() => onEditTx(tx)} />
           ))}
           {!fullFiltered.length && <p className="empty-state">Sin transacciones en este período.</p>}
         </div>
@@ -33,4 +31,3 @@ export default function TransactionsView({ txFilterType, setTxFilterType, txFilt
     </section>
   );
 }
-

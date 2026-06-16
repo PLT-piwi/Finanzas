@@ -22,6 +22,7 @@ export default function App() {
   const [toast, setToast] = useState('');
   const canvasRef = useRef(null);
   const skipSaveRef = useRef(true);
+  const [editingTx, setEditingTx] = useState(null);
 
   useEffect(() => {
     if (skipSaveRef.current) {
@@ -52,24 +53,6 @@ export default function App() {
   );
 
   const monthlyHistory = useMemo(() => getMonthlyHistory(transactions, 6), [transactions]);
-
-  const addTransaction = () => {
-    if (!form.description.trim() || Number(form.amount) <= 0) return;
-    const tx = {
-      id: Date.now().toString(),
-      type: addType,
-      description: form.description.trim(),
-      category: form.category,
-      amount: Number(form.amount),
-      month: Number(form.month),
-      year: Number(form.year),
-      createdAt: new Date().toISOString(),
-    };
-    setTransactions((prev) => [tx, ...prev]);
-    setForm((prev) => ({ ...prev, description: '', amount: '' }));
-    setView('dashboard');
-    showToast('✓ Transacción agregada');
-  };
 
   const deleteTx = (id) => {
     setTransactions((prev) => prev.filter((t) => t.id !== id));
@@ -158,6 +141,52 @@ export default function App() {
     showToast('Meta eliminada');
   };
 
+  const editTransaction = (tx) => {
+  setEditingTx(tx.id);
+  setAddType(tx.type);
+  setForm({
+    description: tx.description,
+    amount: String(tx.amount),
+    category: tx.category,
+    month: tx.month,
+    year: tx.year,
+  });
+  setView('add');
+};
+
+// Modifica addTransaction para que detecte si es edición:
+const addTransaction = () => {
+  if (!form.description.trim() || Number(form.amount) <= 0) return;
+
+  if (editingTx) {
+    setTransactions((prev) =>
+      prev.map((t) =>
+        t.id === editingTx
+          ? { ...t, type: addType, description: form.description.trim(), category: form.category, amount: Number(form.amount), month: Number(form.month), year: Number(form.year) }
+          : t
+      )
+    );
+    setEditingTx(null);
+    setForm({ description: '', amount: '', category: CATEGORIES.expense[0], month: now.getMonth(), year: now.getFullYear() });
+    showToast('✓ Transacción editada');
+    return;
+  }
+
+  const tx = {
+    id: Date.now().toString(),
+    type: addType,
+    description: form.description.trim(),
+    category: form.category,
+    amount: Number(form.amount),
+    month: Number(form.month),
+    year: Number(form.year),
+    createdAt: new Date().toISOString(),
+  };
+  setTransactions((prev) => [tx, ...prev]);
+  setForm((prev) => ({ ...prev, description: '', amount: '' }));
+  showToast('✓ Transacción agregada');
+};
+
   return (
     <>
       <Sidebar
@@ -173,7 +202,7 @@ export default function App() {
 
 <main className="main">
         <div className="main__content">
-          {view === 'dashboard' && <DashboardView title={`${MONTHS[filterMonth]} ${filterYear}`} totals={totals} monthTxs={monthTxs} monthlyHistory={monthlyHistory} canvasRef={canvasRef} onDeleteTx={deleteTx} />}
+          {view === 'dashboard' && <DashboardView title={`${MONTHS[filterMonth]} ${filterYear}`} totals={totals} monthTxs={monthTxs} monthlyHistory={monthlyHistory} canvasRef={canvasRef} onDeleteTx={deleteTx} onEditTx={editTransaction} />}
           {view === 'transactions' && (
             <TransactionsView
               txFilterType={txFilterType}
@@ -182,9 +211,10 @@ export default function App() {
               setTxFilterCat={setTxFilterCat}
               fullFiltered={fullFiltered}
               onDeleteTx={deleteTx}
+              onEditTx={editTransaction} 
             />
           )}
-          {view === 'add' && <AddTransactionView addType={addType} setAddType={setAddType} form={form} setForm={setForm} onAddTransaction={addTransaction} />}
+          {view === 'add' && <AddTransactionView addType={addType} setAddType={setAddType} form={form} setForm={setForm} onAddTransaction={addTransaction} isEditing={!!editingTx} />}
           {view === 'goals' && <GoalsView goals={goals} onAddGoal={addGoal} onDepositGoal={depositGoal} onDeleteGoal={deleteGoal} />}
         </div>
         <footer
@@ -206,4 +236,3 @@ export default function App() {
     </>
   );
 }
-

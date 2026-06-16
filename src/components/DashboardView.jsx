@@ -12,7 +12,7 @@ function MetricCard({ label, value }) {
   );
 }
 
-export default function DashboardView({ title, totals, monthTxs, monthlyHistory, canvasRef, onDeleteTx }) {
+export default function DashboardView({ title, totals, monthTxs, monthlyHistory, canvasRef, onDeleteTx, onEditTx }) {
   const byCategory = groupByCategory(monthTxs);
 
   useEffect(() => {
@@ -70,7 +70,7 @@ export default function DashboardView({ title, totals, monthTxs, monthlyHistory,
         <p className="card__title">Últimas transacciones</p>
         <div className="tx-list">
           {monthTxs.slice(0, 5).map((tx) => (
-            <TxItem key={tx.id} tx={tx} onDelete={() => onDeleteTx(tx.id)} />
+            <TxItem key={tx.id} tx={tx} onDelete={() => onDeleteTx(tx.id)} onEdit={() => onEditTx(tx)}/>
           ))}
           {!monthTxs.length && <p className="empty-state">No hay transacciones este mes.</p>}
         </div>
