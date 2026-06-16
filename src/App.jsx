@@ -171,7 +171,7 @@ export default function App() {
         onExport={handleExport}
       />
 
-      <main className="main">
+<main className="main">
         {view === 'dashboard' && <DashboardView title={`${MONTHS[filterMonth]} ${filterYear}`} totals={totals} monthTxs={monthTxs} monthlyHistory={monthlyHistory} canvasRef={canvasRef} onDeleteTx={deleteTx} />}
         {view === 'transactions' && (
           <TransactionsView
@@ -185,6 +185,35 @@ export default function App() {
         )}
         {view === 'add' && <AddTransactionView addType={addType} setAddType={setAddType} form={form} setForm={setForm} onAddTransaction={addTransaction} />}
         {view === 'goals' && <GoalsView goals={goals} onAddGoal={addGoal} onDepositGoal={depositGoal} onDeleteGoal={deleteGoal} />}
+        <div className="main__content">
+          {view === 'dashboard' && <DashboardView title={`${MONTHS[filterMonth]} ${filterYear}`} totals={totals} monthTxs={monthTxs} monthlyHistory={monthlyHistory} canvasRef={canvasRef} onDeleteTx={deleteTx} />}
+          {view === 'transactions' && (
+            <TransactionsView
+              txFilterType={txFilterType}
+              setTxFilterType={setTxFilterType}
+              txFilterCat={txFilterCat}
+              setTxFilterCat={setTxFilterCat}
+              fullFiltered={fullFiltered}
+              onDeleteTx={deleteTx}
+            />
+          )}
+          {view === 'add' && <AddTransactionView addType={addType} setAddType={setAddType} form={form} setForm={setForm} onAddTransaction={addTransaction} />}
+          {view === 'goals' && <GoalsView goals={goals} onAddGoal={addGoal} onDepositGoal={depositGoal} onDeleteGoal={deleteGoal} />}
+        </div>
+        <footer
+          style={{
+            borderTop: '1px solid #E8ECF0',
+            padding: '10px 18px',
+            textAlign: 'center',
+            fontSize: 11,
+            color: '#94A3B8',
+            background: '#fff',
+            marginTop: 'auto',
+            flexShrink: 0,
+          }}
+        >
+          © {new Date().getFullYear()} Organizador de Finanzas · Todos los derechos reservados Daniel Solano Godoy 🐥
+        </footer>
       </main>
       {toast && <div className="toast">{toast}</div>}
     </>
